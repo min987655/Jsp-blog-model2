@@ -11,6 +11,7 @@ import com.cos.blog.action.Action;
 import com.cos.blog.action.user.UsersJoinAction;
 import com.cos.blog.action.user.UsersJoinProcAction;
 import com.cos.blog.action.user.UsersLoginAction;
+import com.cos.blog.action.user.UsersLoginProcAction;
 
 // http://localhost:8000/blog/user
 @WebServlet("/user")
@@ -35,12 +36,14 @@ public class UsersController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// http://localhost:8000/blog/user?cmd=join
 		String cmd = request.getParameter("cmd");
-		System.out.println(TAG + "doProcess" + cmd);
+		System.out.println(TAG + "doProcess :" + cmd);
 		Action action = router(cmd);
+		System.out.println(TAG + "action : " + action);
 		action.execute(request, response);
 		
 	}
 	public Action router(String cmd) {
+		System.out.println(TAG + "cmd : " + cmd);
 		if(cmd.equals("join")) {
 			// 회원가입 페이지로 이동
 			return new UsersJoinAction();
@@ -57,7 +60,8 @@ public class UsersController extends HttpServlet {
 			// 회원 로그인페이지로 이동 
 			return new UsersLoginAction();
 		} else if (cmd.equals("loginProc")) {
-			// 회원 로그인을 진행 한 후 -> 세션에 등록을 하고 -> index.jsp로 이동 
+			// 회원 로그인을 진행 한 후 -> 세션에 등록을 하고 -> index.jsp로 이동
+			return new UsersLoginProcAction();
 		}
 		return null;
 	}

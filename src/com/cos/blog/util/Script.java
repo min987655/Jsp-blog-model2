@@ -29,7 +29,8 @@ public class Script {
 			
 			out.println("<script>");
 			out.println("alert('"+msg+"');");
-			out.println("localtion.href='"+uri+"';"); // 이동전에 메세지 창 띄워줌
+			out.println("location.href='"+uri+"';"); // 이동전에 메세지 창 띄워줌
+			System.out.println("Script : " + uri);
 			out.println("</script>");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,7 +45,8 @@ public class Script {
 			PrintWriter out = response.getWriter();
 			
 			out.println("<script>");
-			out.println("localtion.href='"+uri+"';"); // 이동전에 메세지 창 띄워줌
+			out.println("location.href='"+uri+"';"); // 이동전에 메세지 창 띄워줌
+			
 			out.println("</script>");
 		} catch (Exception e) {
 			e.printStackTrace();

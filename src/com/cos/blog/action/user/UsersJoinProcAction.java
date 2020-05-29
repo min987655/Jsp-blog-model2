@@ -57,6 +57,8 @@ public class UsersJoinProcAction implements Action{
 		// 4. index.jsp 페이지로 이동
 		if (result == 1) {
 //			response.sendRedirect("/blog/user?cmd=login"); //거의 안씀
+//			Script.href("회원가입에 성공하였습니다.", "/blog/user?cmd=login", response);
+			
 			Script.href("회원가입에 성공하였습니다.", "/blog/user?cmd=login", response);
 		}else {
 			Script.back("회원가입에 실패하였습니다.", response);
