@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
 
 public class Script {
+	
 	public static void back(String msg, HttpServletResponse response) {
 		try {
 			response.setCharacterEncoding("utf-8");
@@ -14,6 +15,36 @@ public class Script {
 			out.println("<script>");
 			out.println("alert('"+msg+"');");
 			out.println("history.back();");
+			out.println("</script>");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public static void href(String msg, String uri, HttpServletResponse response) {
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8"); 
+			PrintWriter out = response.getWriter();
+			
+			out.println("<script>");
+			out.println("alert('"+msg+"');");
+			out.println("localtion.href='"+uri+"';"); // 이동전에 메세지 창 띄워줌
+			out.println("</script>");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void href(String uri, HttpServletResponse response) {
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8"); 
+			PrintWriter out = response.getWriter();
+			
+			out.println("<script>");
+			out.println("localtion.href='"+uri+"';"); // 이동전에 메세지 창 띄워줌
 			out.println("</script>");
 		} catch (Exception e) {
 			e.printStackTrace();
