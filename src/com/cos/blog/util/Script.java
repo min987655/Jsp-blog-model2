@@ -6,6 +6,19 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Script {
 	
+	public static void getMessage(String msg, HttpServletResponse response) {
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8"); 
+			PrintWriter out = response.getWriter();
+			
+			out.println("<h1>"+msg+"</h1>");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public static void back(String msg, HttpServletResponse response) {
 		try {
 			response.setCharacterEncoding("utf-8");

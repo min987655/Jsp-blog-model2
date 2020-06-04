@@ -12,71 +12,67 @@ import com.cos.blog.action.user.UsersJoinAction;
 import com.cos.blog.action.user.UsersJoinProcAction;
 import com.cos.blog.action.user.UsersLoginAction;
 import com.cos.blog.action.user.UsersLoginProcAction;
+import com.cos.blog.action.user.UsersLogoutAction;
+import com.cos.blog.action.user.UsersUsernameCheckAction;
 
 // http://localhost:8000/blog/user
 @WebServlet("/user")
 public class UsersController extends HttpServlet {
 	private final static String TAG = "UsersController : ";
 	private static final long serialVersionUID = 1L;
-       
-    
-    public UsersController() {
-        super();
-    }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public UsersController() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doProcess(request, response);
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doProcess(request, response);
 	}
-	
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// http://localhost:8000/blog/user?cmd=join
 		String cmd = request.getParameter("cmd");
 		System.out.println(TAG + "doProcess :" + cmd);
 		Action action = router(cmd);
 		System.out.println(TAG + "action : " + action);
 		action.execute(request, response);
-		
+
 	}
+
 	public Action router(String cmd) {
 		System.out.println(TAG + "cmd : " + cmd);
-		if(cmd.equals("join")) {
+		if (cmd.equals("join")) {
 			// 회원가입 페이지로 이동
 			return new UsersJoinAction();
 		} else if (cmd.equals("joinProc")) {
-			// 회원가입을 진행 한 후  -> index.jsp로 이동
+			// 회원가입을 진행 한 후 -> index.jsp로 이동
 			return new UsersJoinProcAction();
 		} else if (cmd.equals("update")) {
 			// 회원 수정 페이지로 이동(세션에 User 오브젝트를 가지고 있을 예정)
 		} else if (cmd.equals("updateProc")) {
-			// 회원 수정을 진행 한 후 -> index.jsp로 이동 
+			// 회원 수정을 진행 한 후 -> index.jsp로 이동
 		} else if (cmd.equals("delete")) {
-			// 회원 삭제를 진행 한 후 -> logout을 하고(세션 닫힘) -> index.jsp로 이동 
+			// 회원 삭제를 진행 한 후 -> logout을 하고(세션 닫힘) -> index.jsp로 이동
 		} else if (cmd.equals("login")) {
-			// 회원 로그인페이지로 이동 
+			// 회원 로그인페이지로 이동
 			return new UsersLoginAction();
 		} else if (cmd.equals("loginProc")) {
 			// 회원 로그인을 진행 한 후 -> 세션에 등록을 하고 -> index.jsp로 이동
 			return new UsersLoginProcAction();
+		} else if (cmd.equals("logout")) {
+			return new UsersLogoutAction();
+		} else if (cmd.equals("usernameCheck")) {
+			return new UsersUsernameCheckAction();
 		}
+
 		return null;
 	}
-	
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-

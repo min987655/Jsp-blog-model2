@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.cos.blog.db.DBConn;
 import com.cos.blog.model.Board;
-import com.cos.blog.model.Users;
 
 // DAO 
 public class BoardRepository {
@@ -25,12 +24,16 @@ public class BoardRepository {
 	private ResultSet rs = null;
 	
 	public int save(Board board) {
-		final String SQL = "";
+		final String SQL = "INSERT INTO board(id, userId, title, content, readCount, createDate) VALUES(board_seq.nextval, ?, ?, ?, ?, sysdate)";
 		
 		try {
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			// 물음표 완성하기
+			pstmt.setInt(1, board.getUserId());
+			pstmt.setString(2, board.getTitle());
+			pstmt.setString(3, board.getContent());
+			pstmt.setInt(4, board.getReadCount());
 			
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -79,15 +82,28 @@ public class BoardRepository {
 	}
 	
 	public List<Board> findAll() {
-		final String SQL = "";
+		final String SQL = "SELECT * FROM board ORDER BY id DESC";
 		List<Board> boards = new ArrayList<>();
 		
 		try {
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			// 물음표 완성하기
-			
+
 			// while 돌려서 rs -> java 오브젝트에 집어넣기
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Board board = new Board(
+								rs.getInt("id"),
+								rs.getInt("userId"),
+								rs.getString("title"),
+								rs.getString("content"),
+								rs.getInt("readCount"),
+								rs.getTimestamp("createDate")
+						
+				);
+				boards.add(board);
+			}
+			
 			return boards;
 		} catch (Exception e) {
 			e.printStackTrace();
