@@ -13,8 +13,6 @@
 				<a href="#" class="btn btn-primary">상세보기</a>
 			</div>
 		</div>
-
 	</c:forEach>
 </div>
-
-<%@ include file="include/footer.jsp"%>
+<%@ include file="include/footer.jsp" %>
