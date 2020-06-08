@@ -35,7 +35,15 @@
 	      <!-- <input class="form-check-input" type="checkbox" name="remember" required> 아이디 기억하기
 	      <div class="valid-feedback">Valid.</div>
 	      <div class="invalid-feedback">Check this checkbox to continue.</div> -->
-	      <input class="form-check-input" type="checkbox" name="remember"> 아이디 기억하기
+	      <c:choose>
+	      	<c:when test="${empty cookie.remember}">
+	      		<input value="on" class="form-check-input" type="checkbox" name="remember"> 아이디 기억하기
+	      	</c:when>
+	      	<c:otherwise>
+	      		<input value="on" class="form-check-input" type="checkbox" name="remember" checked> 아이디 기억하기
+	      	</c:otherwise>
+	      </c:choose>
+	      
 	    </label>
 	  </div>
 	  
