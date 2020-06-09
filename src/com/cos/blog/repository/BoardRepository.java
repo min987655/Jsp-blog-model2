@@ -10,6 +10,8 @@ import com.cos.blog.db.DBConn;
 import com.cos.blog.dto.DetailResponseDto;
 import com.cos.blog.model.Board;
 
+import sun.security.util.Length;
+
 // DAO 
 public class BoardRepository {
 	// 싱글톤
@@ -83,6 +85,46 @@ public class BoardRepository {
 			DBConn.close(conn, pstmt);
 		}
 		return -1;
+	}
+	
+	public List<Board> findAll(int page) {
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT /*+ INDEX_DESC(BOARD SYS_C007599)*/id, ");
+		sb.append("userid, title, content, readcount, createdate ");
+		sb.append("FROM board ");
+		sb.append("OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY");
+		
+		final String SQL = sb.toString();
+		List<Board> boards = new ArrayList<>();
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, page*3);
+			// while 돌려서 rs -> java 오브젝트에 집어넣기
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Board board = new Board(
+								rs.getInt("id"),
+								rs.getInt("userId"),
+								rs.getString("title"),
+								rs.getString("content"),
+								rs.getInt("readCount"),
+								rs.getTimestamp("createDate")
+						
+				);
+				boards.add(board);
+			}
+			
+			return boards;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findAll(page) : " +e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		return null;
 	}
 	
 	public List<Board> findAll() {
