@@ -3,7 +3,7 @@
 <%@ include file="../include/nav.jsp"%>
 
 <div class="container">
-	<form action="/blog/user?cmd=updateProc" method="POST" class="was-validated" onsubmit="return validate()">
+	<form action="/blog/user?cmd=updateProc" method="POST" class="was-validated">
 
 		<input type="hidden" name="id" value="${sessionScope.principal.id}"/>
 		<div class="form-group">
@@ -38,5 +38,6 @@
 		<button type="submit" class="btn btn-primary">회원정보 수정</button>
 	</form>
 </div>
+
 
 <%@ include file="../include/footer.jsp"%>
