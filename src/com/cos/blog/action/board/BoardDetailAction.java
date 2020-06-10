@@ -6,6 +6,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
 
 import com.cos.blog.action.Action;
 import com.cos.blog.dto.DetailResponseDto;
@@ -27,6 +28,15 @@ public class BoardDetailAction implements Action {
 		int id = Integer.parseInt(request.getParameter("id"));
 		BoardRepository boardRepository = 
 				BoardRepository.getInstance();
+		
+		// 조회수 증가가 상세보기가 되기 전에 실행되는것이 좋음
+		int result = boardRepository.updateReadCount(id);
+		
+		if (result != 1) {
+			Script.back("서버 오류입니다", response);
+			return;
+		}
+		
 		DetailResponseDto dto = 
 				boardRepository.findById(id);
 		

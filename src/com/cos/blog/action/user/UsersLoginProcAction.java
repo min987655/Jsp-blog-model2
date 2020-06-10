@@ -37,6 +37,8 @@ public class UsersLoginProcAction implements Action {
 				
 				String rawPassword = request.getParameter("password");
 				String password = SHA256.encodeSha256(rawPassword);
+				System.out.println("변경된 password : "+password);
+				System.out.println("572afc3029b3f3a3bf9615b8a76d5516c63dda3b649bc4c45387d3f38c5a5e8b");
 				
 				UsersRepository usersRepository = UsersRepository.getInstance();
 				Users user = usersRepository.findByUsernameAndPassword(username, password);
