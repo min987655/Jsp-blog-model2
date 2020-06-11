@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="pwd">Password:</label> 
+			<label for="password">Password:</label> 
 			<input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
 			<div class="valid-feedback">Valid.</div>
 			<div class="invalid-feedback">Please fill out this field.</div>
@@ -39,5 +39,5 @@
 	</form>
 </div>
 
-
+<script src="${path}/js/juso.js"></script>
 <%@ include file="../include/footer.jsp"%>

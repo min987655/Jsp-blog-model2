@@ -37,5 +37,5 @@
 	</form>
 </div>
 
-<script src="/blog/js/join.js"></script>
+<script src="${path}/js/join.js"></script>
 <%@ include file="../include/footer.jsp"%>

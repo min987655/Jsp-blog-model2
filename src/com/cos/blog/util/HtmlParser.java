@@ -15,7 +15,7 @@ public class HtmlParser {
 		for (Element aTag : aTags) {
 			String href = aTag.attr("href");
 			String youtubeId = null;	
-			if (href != null && aTag.attr("target").equals("_blank")) {
+			if (href != null && !aTag.attr("target").equals("_blank")) {
 				if (href.contains("https://youtu.be")) {
 					String[] hrefArr = href.split("/");
 					youtubeId = hrefArr[3];

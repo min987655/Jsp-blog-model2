@@ -10,9 +10,9 @@ public class YoutubeTest {
 	
 	@Test
 	public void 동영상테스트() {
-		String content = "<a href=\\\"https://www.youtube.com/watch?v=zn4gB8ZVS5c&amp;t=95s\">\r\n"+"https://www.youtube.com/watch?v=zn4gB8ZVS5c&amp;t=95s\r\n"+"</a>";
-				
+		String content = "<p><a href=\"https://www.youtube.com/watch?v=LHWYSE85a6U\" target=\"_blank\">https://www.youtube.com/watch?v=LHWYSE85a6U</a><a href=\"https://www.youtube.com/watch?v=LHWYSE85a6U\"></a></p><p><a href=\\\"https://www.youtube.com/watch?v=LHWYSE85a6U\\\" target=\\\"_blank\\\">https://www.youtube.com/watch?v=LHWYSE85a6U</a><a href=\\\"https://www.youtube.com/watch?v=LHWYSE85a6U\\\"></a></p>";		
 		Document doc = Jsoup.parse(content);
+		
 		Elements els = doc.select("a");
 		Element el = els.get(0);
 		
