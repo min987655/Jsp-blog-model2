@@ -37,5 +37,6 @@
 	</form>
 </div>
 
+<script src="${path}/js/juso.js"></script>
 <script src="${path}/js/join.js"></script>
 <%@ include file="../include/footer.jsp"%>

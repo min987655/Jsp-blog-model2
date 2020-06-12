@@ -24,9 +24,9 @@ public class HtmlParser {
 					youtubeId = hrefArr[1];
 				}
 				
-				System.out.println("JSOUP 파싱 : Youtube : " + youtubeId);
+				/* System.out.println("JSOUP 파싱 : Youtube : " + youtubeId); */
 				String video = "<br/><iframe src='http://www.youtube.com/embed/"+youtubeId+"' width='550px' height='400px' frameborder='0' allowfullscreen></iframe>";
-				System.out.println("video : " + video);
+				/* System.out.println("video : " + video); */
 				aTag.after(video);
 			
 			}
